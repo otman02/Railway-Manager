@@ -206,6 +206,9 @@ switch(choice){
     case 2 :
         achiter();
     break;
+    case 3 :
+        afficherticket();
+    break;
 }
 
  }while(choice != 0);
@@ -214,16 +217,28 @@ switch(choice){
     console.log(trips)
  };
  function achiter(){
-    var ticket = {
-        nom : prompt("enter le nom de passengeur: "),
-        number : Number(prompt("entrez le id de ticket"))
-    };
+    
+     var nomber =Number(prompt("entrez le id de ticket: "));
+       var  nom = prompt("enter le nom de passengeur: ");
     
     for (let i=0; i<trips.length;i++){
-        if(trips[i].id=ticket.number && trips[i].availableSeats>=1){
+        if(trips[i].id==nomber && trips[i].availableSeats>=1){
+            var ticket = {
+        number : nomber,
+        name : nom,
+        departure : trips[i].departure,
+        destination : trips[i].destination,
+        seate : Math.floor(Math.random()*50+1),
+        price : trips[i].price
+
+    }; 
             tickets.push(ticket)
             trips[i].availableSeats= trips[i].availableSeats-1;
+
+            break ;
         };
     };
  };
- 
+ function afficherticket(){
+    console.log(tickets)
+ };
