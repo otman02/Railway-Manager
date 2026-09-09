@@ -219,6 +219,9 @@ do {
         case 6:
             filtrer();
              break;
+        case 7:
+            trier();
+            break;
     }
 
 } while (choice != 0);
@@ -316,5 +319,63 @@ function filtrer(){
     }if (!existtrip){console.log("there is no trips of that departeur. ")}
 };
 function trier(){
-    
-}
+    let order;
+    function monotonie(){
+        console.log("1/ croissant: ");
+        console.log("2/ decroissant: ")
+
+    }
+    do {
+        monotonie();
+         order = Number(prompt("Entrez l'ordre: "));
+        switch(order){
+            case 1:
+                croissant();
+                break;
+            case 2 :
+                decroissant();
+                break;
+
+
+        }
+    }while(order===1 || order===2)
+
+        function croissant(){
+            let system = trips ;
+            let tri;
+            let sewaped;
+            do{ sewaped = false;
+                for (let i=0;i<system.length -1;i++){
+                    for (let j=0;j<system.length-i -1;j++){
+                        if(trips[j].price>system[j+1].price){
+                            tri = system[j+1];
+                            system[j+1] =system[j];
+                            system[j] = tri;
+                            sewaped = true;
+                        }
+                    }
+                }
+            }while(sewaped)
+                for(let i=0;i<system.length;i++)
+            {console.log(system[i].departure+"==>"+system[i].destination +" : "+ system[i].price);}
+        
+        } 
+        function decroissant(){
+            let system =trips
+            let tri;
+            let sewaped;
+            do{ sewaped = false;
+                for (let i=0;i<system.length-1;i++){
+                    for (let j=0;j<system.length-i-1;j++){
+                        if(system[j].price<system[j+1].price){
+                            tri = system[j+1];
+                            system[j+1] =system[j];
+                            system[j] = tri;
+                            sewaped = true;
+                        }
+                    }
+                }
+            }while(sewaped)
+                 for(let i=0;i<system.length;i++)
+            {console.log(system[i].departure+"==>"+system[i].destination +" : "+ system[i].price);}
+}}
