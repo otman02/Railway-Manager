@@ -1,4 +1,4 @@
-var prompt=require('prompt-sync')();
+var prompt = require('prompt-sync')();
 const trips = [
     {
         id: 1,
@@ -185,8 +185,9 @@ const trips = [
 
 
 const tickets = [];
+let ticketanuller = [];
 let choice;
- function menu(){
+function menu() {
     console.log("1/ afficher les trajet.");
     console.log("2/ acheter un ticket. ");
     console.log("3/ afficher les ticket. ")
@@ -195,50 +196,89 @@ let choice;
     console.log("6/ filtrer les  trajets.  ");
     console.log("7/ trier les trajets. ");
     console.log("0/ quiter les programe. ")
- };
- do {
-     menu();
- choice = Number(prompt("Entrez choix: "));
-switch(choice){
-    case 1 :
-        affichertrajet();
-    break;
-    case 2 :
-        achiter();
-    break;
-    case 3 :
-        afficherticket();
-    break;
-}
+};
+do {
+    menu();
+    choice = Number(prompt("Entrez choix: "));
+    switch (choice) {
+        case 1:
+            affichertrajet();
+            break;
+        case 2:
+            achiter();
+            break;
+        case 3:
+            afficherticket();
+            break;
+        case 4:
+            annulerticket();
+            break;
+    }
 
- }while(choice != 0);
+} while (choice != 0);
 
- function affichertrajet(){
+function affichertrajet() {
     console.log(trips)
- };
- function achiter(){
-    
-     var nomber =Number(prompt("entrez le id de ticket: "));
-       var  nom = prompt("enter le nom de passengeur: ");
-    
-    for (let i=0; i<trips.length;i++){
-        if(trips[i].id==nomber && trips[i].availableSeats>=1){
-            var ticket = {
-        number : nomber,
-        name : nom,
-        departure : trips[i].departure,
-        destination : trips[i].destination,
-        seate : Math.floor(Math.random()*50+1),
-        price : trips[i].price
+};
+function achiter() {
 
-    }; 
+    var nomber = Number(prompt("entrez le id de ticket: "));
+    var nom = prompt("enter le nom de passengeur: ");
+    exist = false;
+    let seates;
+  
+    for (let i = 0; i < trips.length; i++) {
+        
+        if (trips[i].id === nomber ) {
+            if (trips[i].availableSeats>=1){
+               
+                   if (ticketanuller.length!=0){
+                     for (let j=0;j<ticketanuller.length;j++){
+                    seates=ticketanuller[j].seate}}
+                    else {seates=trips[i].availableSeats}
+              
+                
+                 
+                var ticket = {
+                tid: tickets.length + 1,
+                name: nom,
+                departure: trips[i].departure,
+                destination: trips[i].destination,
+                tripid: trips[i].id,
+                seate:  seates,
+
+                
+                price: trips[i].price
+
+            };
+              
             tickets.push(ticket)
-            trips[i].availableSeats= trips[i].availableSeats-1;
-
-            break ;
-        };
+            trips[i].availableSeats = trips[i].availableSeats - 1;
+            console.log(ticket);
+            exist = true;
+           break;
+            } else { console.log("the trip is full")}
+            
+        }
+        
+        
+        } if (!exist){ console.log("no trips availibel: ")};
+        
     };
- };
- function afficherticket(){
+
+function afficherticket() {
     console.log(tickets)
- };
+};
+function annulerticket() {
+    let ticketid = Number(prompt("entre the number of the ticket: "));
+    
+    for(let i=0;i<tickets.length;i++){
+        let l = tickets[i].tripid-1;
+        if (ticketid===tickets[i].tid){
+            ticketanuller.push(tickets[i])
+            tickets.splice(i,1)
+            trips[l].availableSeats +=1
+        }
+    }
+
+};
