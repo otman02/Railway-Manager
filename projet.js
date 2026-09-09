@@ -213,6 +213,12 @@ do {
         case 4:
             annulerticket();
             break;
+        case 5:
+            rechercher();
+        break;
+        case 6:
+            filtrer();
+             break;
     }
 
 } while (choice != 0);
@@ -224,6 +230,7 @@ function achiter() {
 
     var nomber = Number(prompt("entrez le id de ticket: "));
     var nom = prompt("enter le nom de passengeur: ");
+    nom = nom.toLowerCase();
     exist = false;
     let seates;
   
@@ -282,3 +289,32 @@ function annulerticket() {
     }
 
 };
+function rechercher(){
+    let nomrechercher = prompt("enter le nom de passageur: ");
+    nomrechercher = nomrechercher.toLowerCase();
+    let trouver = false;
+    for (let i= 0; i<tickets.length;i++){
+        if (tickets[i].name===nomrechercher){
+            console.log(tickets[i])
+            trouver= true;
+            
+        }
+        
+    }if(!trouver){console.log("there is no ticket")}
+        
+};
+function filtrer(){
+    let city = prompt("entre la ville de depart: ");
+    let existtrip =false;
+   for (let i=0; i<trips.length;i++){
+    let depar = trips[i].departure;
+    depar = depar.toLowerCase();
+        if(depar===city){
+            console.log(trips[i].departure+"==>"+trips[i].destination +" : "+ trips[i].price);
+            existtrip =true;
+      }
+    }if (!existtrip){console.log("there is no trips of that departeur. ")}
+};
+function trier(){
+    
+}
