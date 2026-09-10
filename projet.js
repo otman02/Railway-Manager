@@ -222,6 +222,9 @@ do {
         case 7:
             trier();
             break;
+        case 8:
+            statistique();
+            break;
     }
 
 } while (choice != 0);
@@ -231,7 +234,7 @@ function affichertrajet() {
 };
 function achiter() {
 
-    var nomber = Number(prompt("entrez le id de ticket: "));
+    var nomber = Number(prompt("entrez le id de trajet: "));
     var nom = prompt("enter le nom de passengeur: ");
     nom = nom.toLowerCase();
     exist = false;
@@ -244,7 +247,9 @@ function achiter() {
                
                    if (ticketanuller.length!=0){
                      for (let j=0;j<ticketanuller.length;j++){
-                    seates=ticketanuller[j].seate}}
+                    seates=ticketanuller[j].seate
+                    ticketanuller.splice(j,1)}}
+                                               
                     else {seates=trips[i].availableSeats}
               
                 
@@ -288,6 +293,7 @@ function annulerticket() {
             ticketanuller.push(tickets[i])
             tickets.splice(i,1)
             trips[l].availableSeats +=1
+            console.log("the ticket have been deleted. ")
         }
     }
 
@@ -379,3 +385,36 @@ function trier(){
                  for(let i=0;i<system.length;i++)
             {console.log(system[i].departure+"==>"+system[i].destination +" : "+ system[i].price);}
 }}
+function statistique(){
+    let ticketnumber=0;
+    let sommme=0;
+    
+    for (let i=0;i<tickets.length;i++){
+        ticketnumber=tickets.length
+        
+    }console.log("the number of solde ticketis :"+ticketnumber);
+    for (let i=0;i<tickets.length;i++){
+        sommme= sommme + tickets[i].price
+
+    } console.log("chiffre d'affaires total est :"+ sommme);
+    let sold =0;
+    let mostsold =null;
+
+
+    for (let i=0;i<trips.length;i++){
+        cnt = 0;
+        for ( let j=0;j<tickets.length;j++){
+            if (tickets[j].tripid===trips[i].id){
+                cnt+=1
+            }
+        }
+        if (cnt>sold){
+            sold=cnt;
+            mostsold=trips[i].id
+        }
+    }
+    if(mostsold!=0){console.log("the most sold  trips id is : "+mostsold);}
+    else {console.log("no trips sold yet. ")}
+    
+
+}
