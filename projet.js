@@ -300,14 +300,6 @@ function afficherticket() {
 
     }
     
-
-
-
-
-
-
-
-
 };
 function annulerticket() {
     let ticketid = Number(prompt("entre the number of the ticket: "));
@@ -329,7 +321,11 @@ function rechercher(){
     let trouver = false;
     for (let i= 0; i<tickets.length;i++){
         if (tickets[i].name===nomrechercher){
-            console.log(tickets[i])
+            console.log(`----------------------\n#ticket id :${tickets[i].tid}\n#trajet : ${tickets[i].tripid}\n${tickets[i].
+            departure}-->${tickets[i].destination}\npassageur : ${tickets[i].name}\nplace: ${tickets[i].
+                seate}\nprix : ${tickets[i].price}\n-------------------
+            
+            `)
             trouver= true;
             
         }
@@ -392,7 +388,7 @@ function trier(){
         
         } 
         function decroissant(){
-            let system =trips
+            let system =trips;
             let tri;
             let sewaped;
             do{ sewaped = false;
