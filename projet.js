@@ -195,6 +195,7 @@ function menu() {
     console.log("5/ rechercher un ticket. ");
     console.log("6/ filtrer les  trajets.  ");
     console.log("7/ trier les trajets. ");
+    console.log("8/ statistique: ");
     console.log("0/ quiter les programe. ")
 };
 do {
@@ -225,6 +226,7 @@ do {
         case 8:
             statistique();
             break;
+        
     }
 
 } while (choice != 0);
@@ -239,6 +241,7 @@ function achiter() {
     nom = nom.toLowerCase();
     exist = false;
     let seates;
+    let tids;
   
     for (let i = 0; i < trips.length; i++) {
         
@@ -247,15 +250,21 @@ function achiter() {
                
                    if (ticketanuller.length!=0){
                      for (let j=0;j<ticketanuller.length;j++){
-                    seates=ticketanuller[j].seate
+                        if (ticketanuller[j].tripid=nomber){
+                             seates=ticketanuller[j].seate
+                             tids=ticketanuller[j].tid
+
                     ticketanuller.splice(j,1)}}
+
+                        }
+                   
                                                
-                    else {seates=trips[i].availableSeats}
+                    else {seates=trips[i].availableSeats;tids=tickets.length +1}
               
                 
                  
                 var ticket = {
-                tid: tickets.length + 1,
+                tid: tids,
                 name: nom,
                 departure: trips[i].departure,
                 destination: trips[i].destination,
@@ -282,7 +291,23 @@ function achiter() {
     };
 
 function afficherticket() {
-    console.log(tickets)
+    for (let i=0;i<tickets.length;i++){
+        console.log(`----------------------\n#ticket id :${tickets[i].tid}\n#trajet : ${tickets[i].tripid}\n${tickets[i].
+            departure}-->${tickets[i].destination}\npassageur : ${tickets[i].name}\nplace: ${tickets[i].
+                seate}\nprix : ${tickets[i].price}\n-------------------
+            
+            `)
+
+    }
+    
+
+
+
+
+
+
+
+
 };
 function annulerticket() {
     let ticketid = Number(prompt("entre the number of the ticket: "));
